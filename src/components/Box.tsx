@@ -1,19 +1,18 @@
-interface StyleSheet {
-  fontFamily: string
-}
+import { BaseComponent } from "@src/theme/BaseComponent";
+import { stylesheet } from "@src/theme/StyleSheet";
 
 interface BoxProps {
   // any será resolvido posteriormente
   tag: any;
   children: React.ReactNode;
-  styleSheet: StyleSheet
+  stylesheet: stylesheet
 }
 
-export default function Box({ styleSheet, children, tag }: BoxProps) {
+export default function Box({ stylesheet, children, tag, ...props }: BoxProps) {
   const Tag = tag || 'div'
   return (
-    <Tag style={styleSheet}>
+    <BaseComponent as={Tag} stylesheet={stylesheet} {...props}>
       {children}
-    </Tag>
+    </BaseComponent>
   )
 }
