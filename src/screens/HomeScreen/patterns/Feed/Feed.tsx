@@ -1,4 +1,5 @@
 import Box from "@src/components/Box/Box";
+import Image from "@src/components/Image/image";
 import Text from "@src/components/Text/Text";
 import Icon from "@src/components/icon/icon";
 import React from "react";
@@ -25,6 +26,15 @@ Feed.Header = () => {
         color: 'white'
       }}
     >
+      <Image
+        src='https://github.com/peustone.png'
+        alt='Imagem de perfil do Pedro'
+        stylesheet={{
+          width: '128px',
+          height: '128px',
+          borderRadius: '100%'
+        }}
+      />
       <Icon name="youtube" />
       <Icon name="twitter" />
       <Icon name="instagram" />
