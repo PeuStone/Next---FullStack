@@ -1,16 +1,18 @@
 import React from "react";
-import theme from "@src/theme/theme";
+import { ThemeTypographyVariants } from "@src/theme/theme";
 import { stylesheet } from "@src/theme/StyleSheet";
 import { BaseComponent } from "@src/theme/BaseComponent";
+import { useTheme } from '@src/theme/ThemeProvider'
 
 interface TextProps {
-  variant?: 'display1'
+  variant?: ThemeTypographyVariants;
   children: React.ReactNode;
-  tag: 'p' | 'li' | 'h1' | string;
+  tag: 'p' | 'li' | 'h1';
   stylesheet: stylesheet;
 }
 
 export default function Text({ stylesheet, variant, ...props }: TextProps) {
+  const theme = useTheme();
   const textVariant = theme.typography.variants[variant]
 
   return (
