@@ -1,5 +1,6 @@
 import Box from "@src/components/Box/Box";
 import Text from "@src/components/Text/Text";
+import Icon from "@src/components/icon/icon";
 import React from "react";
 
 interface FeedProps {
@@ -19,7 +20,15 @@ export default function Feed({ children }: FeedProps) {
 
 Feed.Header = () => {
   return (
-    <Box>
+    <Box
+      stylesheet={{
+        color: 'white'
+      }}
+    >
+      <Icon name="youtube" />
+      <Icon name="twitter" />
+      <Icon name="instagram" />
+      <Icon name="github" />
       <Text>
         Feed Header
       </Text>

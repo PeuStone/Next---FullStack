@@ -7,8 +7,8 @@ import { useTheme } from '@src/theme/ThemeProvider'
 interface TextProps {
   variant?: ThemeTypographyVariants;
   children: React.ReactNode;
-  tag: 'p' | 'li' | 'h1';
-  stylesheet: stylesheet;
+  tag: 'p' | 'li' | 'h1'| 'h2';
+  stylesheet?: stylesheet;
 }
 
 export default function Text({ stylesheet, variant, ...props }: TextProps) {
