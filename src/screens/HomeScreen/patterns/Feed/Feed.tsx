@@ -1,5 +1,6 @@
 import Box from "@src/components/Box/Box";
 import Image from "@src/components/Image/image";
+import Link from "@src/components/Link/Link";
 import Text from "@src/components/Text/Text";
 import Icon from "@src/components/icon/icon";
 import React from "react";
@@ -21,11 +22,7 @@ export default function Feed({ children }: FeedProps) {
 
 Feed.Header = () => {
   return (
-    <Box
-      stylesheet={{
-        color: 'white'
-      }}
-    >
+    <Box>
       <Image
         src='https://github.com/peustone.png'
         alt='Imagem de perfil do Pedro'
@@ -35,7 +32,9 @@ Feed.Header = () => {
           borderRadius: '100%'
         }}
       />
-      <Icon name="youtube" />
+      <Link href="https://youtube.com">
+        <Icon name="youtube" />
+      </Link>
       <Icon name="twitter" />
       <Icon name="instagram" />
       <Icon name="github" />
