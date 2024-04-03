@@ -4,6 +4,7 @@ import Image from "@src/components/Image/image";
 import Link from "@src/components/Link/Link";
 import Text from "@src/components/Text/Text";
 import Icon from "@src/components/icon/icon";
+import { useTheme } from "@src/theme/ThemeProvider";
 import React from "react";
 
 interface FeedProps {
@@ -11,42 +12,75 @@ interface FeedProps {
 }
 
 export default function Feed({ children }: FeedProps) {
+  const theme = useTheme();
   return (
-    <Box>
-      <Text>
-        Feed Base
-      </Text>
+    <Box
+      stylesheet={{
+        width: '100%',
+        backgroundColor: theme.colors.neutral.x000,
+        marginTop: '-228px',
+        maxWidth: '683px',
+        borderRadius: '8px',
+        paddingVertical: '40px',
+        paddingHorizontal: '32px'
+      }}
+    >
       {children}
     </Box>
   )
 }
 
 Feed.Header = () => {
+  const theme = useTheme();
   return (
-    <Box>
-      <Button>
-        Olá pessoas!
-      </Button>
-      <Button.Base href="https://github.com/peustone">
+    <Box
+      stylesheet={{
+        borderBottom: `1px solid ${theme.colors.neutral.x200}`,
+        marginBottom: '24px',
+        paddingBottom: '24px'
+      }}
+    >
+      <Box
+        stylesheet={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          gap: '16px',
+          marginBottom: '16px'
+        }}
+      >
         <Image
           src='https://github.com/peustone.png'
           alt='Imagem de perfil do Pedro'
           stylesheet={{
-            width: '128px',
-            height: '128px',
+            width: { xs: '100px', md: '128px' },
+            height: { xs: '100px', md: '128px' },
             borderRadius: '100%'
           }}
         />
-      </Button.Base>
-      <Link href="https://youtube.com">
+        <Box
+          stylesheet={{
+            justifyContent: 'space-between'
+          }}
+        >
+          <Box stylesheet={{ flex: 1, justifyContent: 'space-between', display: { xs: 'none', md: 'flex' } }}>
+            <Button fullWidth colorVariant="primary" size="xl" href="/"> Newsletter </Button>
+            <Button fullWidth colorVariant="neutral" size="xl" href="/"> Buy me a coffee </Button>
+          </Box>
+          <Box stylesheet={{ flex: 1, justifyContent: 'space-between', display: { xs: 'flex', md: 'none' } }}>
+            <Button fullWidth colorVariant="primary" size="xs" href="/"> Newsletter </Button>
+            <Button fullWidth colorVariant="neutral" size="xs" href="/"> Buy me a coffee </Button>
+          </Box>
+        </Box>
+      </Box>
+      <Text tag="h1" variant="heading4">
+        Pedro Henrique
+      </Text>
+      {/* <Link href="https://youtube.com">
         <Icon name="youtube" />
       </Link>
       <Icon name="twitter" />
       <Icon name="instagram" />
-      <Icon name="github" />
-      <Text>
-        Feed Header
-      </Text>
+      <Icon name="github" /> */}
     </Box>
   )
 }
