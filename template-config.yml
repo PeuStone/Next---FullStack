@@ -1,0 +1,8 @@
+site:
+  title: "PeuStone - Timeline"
+  description: "Bem vindo a minha timeline pessoal"
+personal:
+  name: "Pedro Henrique"
+  avatar: "https://github.com/peustone.png"
+  socialNetworks:
+    github: "https://www.github.com/peustone"
