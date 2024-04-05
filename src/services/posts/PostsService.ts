@@ -27,7 +27,7 @@ export default function PostsServices() {
         console.log(content);
         const post: PostProps = {
           metadata: {
-            date: data.date.toString(),
+            date: new Date( data.date).toISOString(),
             excerpt: data.excerpt,
             tags: data.tags,
             url: data.url,
