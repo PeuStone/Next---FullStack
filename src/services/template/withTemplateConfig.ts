@@ -1,7 +1,7 @@
 import path from 'path';
 import readYamlFile from 'read-yaml-file/index';
 
-interface TemplateConfig {
+export interface TemplateConfig {
   site?: {
     title?: string;
     description?: string;
