@@ -4,9 +4,11 @@ import Image from "@src/components/Image/image";
 import Link from "@src/components/Link/Link";
 import Text from "@src/components/Text/Text";
 import Icon from "@src/components/icon/icon";
+import type { PostProps } from "@src/services/posts/PostsService";
 import { useTemplateConfig } from "@src/services/template/TemplateConfigContext";
 import { useTheme } from "@src/theme/ThemeProvider";
 import React from "react";
+import { FeedPost } from "./patterns/FeedPost";
 
 interface FeedProps {
   children: React.ReactNode;
@@ -22,7 +24,7 @@ export default function Feed({ children }: FeedProps) {
         marginTop: '-228px',
         maxWidth: '683px',
         borderRadius: '8px',
-        paddingVertical: '40px',
+        paddingTop: '40px',
         paddingHorizontal: '32px'
       }}
     >
@@ -117,12 +119,29 @@ Feed.Header = () => {
   )
 }
 
-Feed.Posts = () => {
+interface FeedPostProps {
+  posts: PostProps[];
+}
+
+Feed.Posts = ({ posts }: FeedPostProps) => {
   return (
     <Box>
-      <Text>
-        Feed Posts
+      <Text variant="heading3" stylesheet={{ marginBottom: '27px' }}>
+        Últimas Atualizações
       </Text>
+      {posts.map(({ title, slug, metadata }) => {
+        const { date, excerpt, url, tags } = metadata
+        return (
+          <FeedPost
+            key={slug}
+            title={title}
+            date={date}
+            excerpt={excerpt}
+            tags={tags}
+            url={url}
+          />
+        )
+      })}
     </Box>
   )
 }
