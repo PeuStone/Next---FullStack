@@ -3,8 +3,30 @@ import Button from "@src/components/Button/Button";
 import Image from "@src/components/Image/image";
 import Text from "@src/components/Text/Text";
 import { BaseComponent } from "@src/theme/BaseComponent";
+import { useState } from "react";
+
+function useForm({ initialValues }) {
+  const [values, setValues] = useState(initialValues);
+
+  return {
+    values,
+    handleChange(event) {
+      const { name, value } = event.target
+      setValues({
+        ...values,
+        [name]: value
+      })
+    }
+  };
+}
 
 export default function NewsletterScreen() {
+  const form = useForm({
+    initialValues: {
+      emailNewsletter: ""
+    }
+  });
+
   return (
     <Box
       stylesheet={{
@@ -13,39 +35,59 @@ export default function NewsletterScreen() {
         justifyContent: 'center',
       }}
     >
-      <Box
-        stylesheet={{
-          alignItems: 'center',
-          width: "100%",
-          maxWidth: "500px",
-          padding: "16px"
+      <form
+        onSubmit={(evento) => {
+          evento.preventDefault();
+          console.log('estamos enviando os dados do formulario');
+
+          // Validar
+            if(!form.values.emailNewsletter.includes("@")){
+              alert("Você precisa informar um email valido!")
+              return;
+            }
+          // Enviar para o servidor o email da pessoa
         }}
       >
-        <Image
-          src='https://www.github.com/peustone.png'
-          alt="Foto do PeuStone"
+        <Box
           stylesheet={{
-            borderRadius: "100%",
-            width: '100px',
-            marginBottom: '16px',
+            alignItems: 'center',
+            width: "100%",
+            maxWidth: "500px",
+            padding: "16px"
           }}
-        />
-        <Text variant="heading2">
-          Newsletter do PeuStone
-        </Text>
-        <NewsletterTextField
-          placeholder="informe o seu email"
-        />
-        <Button fullWidth stylesheet={{ marginTop: "16px" }}>
-          Cadastrar
-        </Button>
-      </Box>
+        >
+          <Image
+            src='https://www.github.com/peustone.png'
+            alt="Foto do PeuStone"
+            stylesheet={{
+              borderRadius: "100%",
+              width: '100px',
+              marginBottom: '16px',
+            }}
+          />
+          <Text variant="heading2">
+            Newsletter do PeuStone
+          </Text>
+          <NewsletterTextField
+            placeholder="informe o seu email"
+            name="emailNewsletter"
+            value={form.values.emailNewsletter}
+            onChange={form.handleChange}
+          />
+          <Button fullWidth stylesheet={{ marginTop: "16px" }}>
+            Cadastrar
+          </Button>
+        </Box>
+      </form>
     </Box>
   )
 }
 
 interface NewsletterTextFieldProps {
-  placeholder?: string
+  placeholder?: string;
+  value?: string;
+  name: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function NewsletterTextField(props: NewsletterTextFieldProps) {
