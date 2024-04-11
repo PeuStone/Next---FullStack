@@ -50,7 +50,7 @@ export default function NewsletterScreen() {
           fetch("/api/newsletter/optin", {
             method: "POST",
             headers: {
-              "Content-type": "application/json",
+              "Content-type": "application/json", // MIME type
             },
             body: JSON.stringify(form.values),
           })
