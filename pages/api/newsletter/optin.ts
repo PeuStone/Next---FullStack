@@ -3,8 +3,8 @@ import { createClient } from "@supabase/supabase-js";
 
 // Supabase Setup
 // ==============
-const SUPABASE_URL = "https://gebawyropvzbglnaleck.supabase.co"
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlYmF3eXJvcHZ6YmdsbmFsZWNrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTMxODM3NzYsImV4cCI6MjAyODc1OTc3Nn0.TBme05XdGIJ-dw62owQyw0p4EIGuP2StM2ZIjT9wFuo"
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_KEY = process.env.SUPABASE_KEY;
 const dbClient = createClient(SUPABASE_URL, SUPABASE_KEY)
 //===============
 
@@ -29,7 +29,7 @@ const controllerByMethod = {
 
     res
       .status(httpStatus.Success)
-      .json({ message: "Get request!", data })
+      .json({ message: "Get request!", total: data.length })
   }
 }
 
