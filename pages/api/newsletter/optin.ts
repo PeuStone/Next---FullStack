@@ -1,4 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { createClient } from "@supabase/supabase-js";
+
+// Supabase Setup
+// ==============
+const SUPABASE_URL = "https://gebawyropvzbglnaleck.supabase.co"
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdlYmF3eXJvcHZ6YmdsbmFsZWNrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTMxODM3NzYsImV4cCI6MjAyODc1OTc3Nn0.TBme05XdGIJ-dw62owQyw0p4EIGuP2StM2ZIjT9wFuo"
+const dbClient = createClient(SUPABASE_URL, SUPABASE_KEY)
+//===============
 
 const httpStatus = {
   Success: 200,
@@ -8,15 +16,20 @@ const httpStatus = {
 }
 
 const controllerByMethod = {
-  POST(req: NextApiRequest, res: NextApiResponse) { // Cria coisas
+  async POST(req: NextApiRequest, res: NextApiResponse) { // Cria coisas
     res
       .status(httpStatus.Success)
       .json({ message: "Post request!" })
   },
-  GET(req: NextApiRequest, res: NextApiResponse) { // Retorna coisas
+  async GET(req: NextApiRequest, res: NextApiResponse) { // Retorna coisas
+    const { data, error } = await dbClient.from("newsletter_users")
+      .select("*")
+    console.log(data);
+    console.log(error);
+
     res
       .status(httpStatus.Success)
-      .json({ message: "Get request!" })
+      .json({ message: "Get request!", data })
   }
 }
 
