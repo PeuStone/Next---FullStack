@@ -24,8 +24,6 @@ export default function PostsServices() {
         const filePath = path.join(PATH_POSTS, postFileName)
         const postFile = await fs.readFile(filePath, { encoding: "utf-8" });
         const { data, content } = matter(postFile)
-        console.log(data);
-        console.log(content);
         const post: PostProps = {
           metadata: {
             date: new Date( data.date).toISOString(),
