@@ -17,9 +17,30 @@ const httpStatus = {
 
 const controllerByMethod = {
   async POST(req: NextApiRequest, res: NextApiResponse) { // Cria coisas
+    const email = req.body.emailNewsletter;
+
+    // Fail Fast Validation
+    if (!Boolean(email) || !email.includes("@")) {
+      res
+        .status(httpStatus.BadRequest)
+        .json({ message: "Você precisa enviar um email válido ex: teste@teste.com" })
+      return;
+    }
+
+    // Sanitize do email
+    // - Remover potenciais códigos maliciosos
+
+    // Adiciona a pessoa na newsletter
+    await dbClient.from("newsletter_users")
+      .insert({ email: email, optin: true });
+
+    // Cria usuários de fato no sistema
+    await dbClient.auth.admin.createUser({ email: email })
+
     res
       .status(httpStatus.Success)
-      .json({ message: "Post request!" })
+      .json({ message: "Post request!" });
+
   },
   async GET(req: NextApiRequest, res: NextApiResponse) { // Retorna coisas
     const { data, error } = await dbClient.from("newsletter_users")
